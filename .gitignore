@@ -1,2 +1,4 @@
 Dockerfile
-bistro-source
+local_repo_bistro_*.tgz
+
+bistro/
