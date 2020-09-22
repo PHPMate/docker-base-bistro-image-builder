@@ -1,0 +1,24 @@
+name: Publish Docker image
+on:
+  - push
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: git clone https://github.com/facebook/bistro.git
+
+      - name: Prepare Dockerfile
+        run: cd bistro/build && ./fbcode_builder/make_docker_context.py --make-parallelism=$(nproc) --docker-context-dir=../../ --os-image="ubuntu:18.04" --gcc-version=7 --local-repo-dir="bistro/bistro"
+
+      - name: Publish to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: rectorphp/docker-base-bistro-image-builder/bistro
+          tag_with_ref: true
