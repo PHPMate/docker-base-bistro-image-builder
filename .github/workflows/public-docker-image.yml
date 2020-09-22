@@ -12,7 +12,7 @@ jobs:
       - run: git clone https://github.com/facebook/bistro.git
 
       - name: Prepare Dockerfile
-        run: cd bistro/build && ./fbcode_builder/make_docker_context.py --make-parallelism=$(nproc) --docker-context-dir=../../ --os-image="ubuntu:18.04" --gcc-version=7 --local-repo-dir="../bistro"
+        run: cd bistro/build && ./fbcode_builder/make_docker_context.py --make-parallelism=$(nproc) --docker-context-dir=../../ --os-image="ubuntu:18.04" --gcc-version=7
 
       # docs: https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Publish to GitHub Packages
