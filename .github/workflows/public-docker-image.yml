@@ -11,6 +11,9 @@ jobs:
 
       - run: git clone https://github.com/facebook/bistro.git
 
+      # Because master is bugged
+      - run: cd bistro && git checkout 9b8bad1dd0a9b368e63f6b097b07b5faea9d0c35
+
       - name: Prepare Dockerfile
         run: |
           cd bistro/build && ./fbcode_builder/make_docker_context.py \
